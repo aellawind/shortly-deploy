@@ -29,4 +29,4 @@ results
 npm-debug.log
 node_modules
 public/dist
-db
+db/*
