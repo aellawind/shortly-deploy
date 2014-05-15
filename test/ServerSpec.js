@@ -11,7 +11,7 @@ var Link = require('../app/models/link');
 // NOTE: these tests are designed for mongo!
 /////////////////////////////////////////////////////
 
-xdescribe('', function() {
+describe('', function() {
 
   beforeEach(function(done) {
     // Log out currently signed in user
@@ -23,7 +23,7 @@ xdescribe('', function() {
         Link.remove({url : 'http://www.roflzoo.com/'}).exec();
         User.remove({username : 'Savannah'}).exec();
         User.remove({username : 'Phillip'}).exec();
-
+        User.remove({username : 'Amira'}).exec();
         done();
       });
   });
@@ -209,8 +209,8 @@ xdescribe('', function() {
 
     beforeEach(function(done) {
       new User({
-          'username': 'Phillip',
-          'password': 'Phillip'
+          'username': 'Amira',
+          'password': 'Anuar'
       }).save(function(){
         done();
       });
@@ -220,8 +220,8 @@ xdescribe('', function() {
       request(app)
         .post('/login')
         .send({
-          'username': 'Phillip',
-          'password': 'Phillip' })
+          'username': 'Amira',
+          'password': 'Anuar' })
         .expect(302)
         .expect(function(res) {
           expect(res.headers.location).to.equal('/');
