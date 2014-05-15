@@ -8,22 +8,15 @@ var urlSchema = mongoose.Schema({
   code: String,
   title: String,
   timestamp: { type : Date, default: Date.now },
-  visits: {type: Number, default: 0}
+  visits: {type: Number, default: 0},
 });
 
-urlSchema.methods.init = function() {
+urlSchema.pre('save', function(next) {
   var shasum = crypto.createHash('sha1');
   shasum.update(this.url);
   this.code = shasum.digest('hex').slice(0, 5);
-};
-
-// userSchema.pre('save', function(next) {
-//   var user = this;
-//   user.hashPassword();
-//   next();
-// });
-
-var Link = mongoose.model('Link', urlSchema);
+  next();
+});
 
 module.exports = mongoose.model('Link', urlSchema);
 
